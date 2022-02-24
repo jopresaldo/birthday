@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+        <h2>Birthday Details</h2>
+
+        <p>
+            Month: <input id = "inpt1"> 
+        </p>
+
+        <p>
+            Date: <input id = "inpt2"> 
+        </p>
+        
+        <p>
+            Year: <input id = "inpt3"> 
+        </p>
+
+        <br>
+
+        <button type = "button" onclick = "birthDate()"> Submit </button>
+
+        <p id = "p1"></p>
+        <p id = "p2"></p>
+
+        <script>
+            function birthDate(){
+
+                var month = document.getElementById("inpt1").value;
+                var date = document.getElementById("inpt2").value;
+                var year = document.getElementById("inpt3").value;
+
+                var text1;
+                var text2;
+                var feb;
+
+                //Verifying if inputs are valid and leap year status
+                if(isNaN(year) || year < 1 || year > 2022){
+                    text1 = "Input not valid";
+                }
+                else{
+                    if(year % 4 == 0)
+                    {
+                        if(year % 100 == 0){
+                            feb = 28;
+                            text2 = "NOT LEAP YEAR"
+                        }
+                        else if(year % 400 == 0)
+                        {
+                            feb = 29;
+                            text2 = "LEAP YEAR"
+                        }
+                        else
+                        {
+                            feb = 29;
+                            text2 = "LEAP YEAR"
+                        }
+                    }
+                    else{
+                        feb = 28;
+                        text2 = "NOT LEAP YEAR"
+                    }
+                }
+
+                if (isNaN(month) || month < 1 || month > 12){
+                    text1 = "Input not valid";
+                } 
+                else{
+                    if(month >= 1 && month <= 7){
+                        if(month % 2 == 1){
+                            if(isNaN(date) || date < 1 || date > 31){
+                                text1 = "Input not valid";
+                                text2 = " ";
+                            }
+                            else{
+                                text1 = month + " / " + date + " / " + year;
+                            }
+                        }
+                        else if(month == 2){
+                            if(isNaN(date) || date < 1 || date > feb){
+                                text1 = "Input not valid";
+                                text2 = " ";
+                            }
+                            else{
+                                text1 = month + " / " + date + " / " + year;
+                            }
+                        }
+                        else{
+                            if(isNaN(date) || date < 1 || date > 30){
+                                text1 = "Input not valid";
+                                text2 = " ";
+                            }
+                            else{
+                                text1 = month + " / " + date + " / " + year;
+                            }
+                        }
+                    }
+                    else{
+                        if(month % 2 == 0){
+                            if(isNaN(date) || date < 1 || date > 31){
+                                text1 = "Input not valid";
+                                text2 = " ";
+                            }
+                            else{
+                                text1 = month + " / " + date + " / " + year;
+                            }
+                        }
+                        else{
+                            if(isNaN(date) || date < 1 || date > 30){
+                                text1 = "Input not valid";
+                                text2 = " ";
+                            }
+                            else{
+                                text1 = month + " / " + date + " / " + year;
+                            }
+                        }
+                    }
+                }
+                document.getElementById("p1").innerHTML = "| " + text1 + " | " + text2 + " |";
+
+                var today = new Date();
+                var birthDate = new Date(year + "-" + month + "-" + date);
+                var age = today.getFullYear() - birthDate.getFullYear();
+                var m = today.getMonth() - birthDate.getMonth();
+
+                if(m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
+                {
+                    age--;
+                }
+
+                document.getElementById("p2").innerHTML = age + " years old";
+            }
+        </script>
+    </body>
+</html> 
